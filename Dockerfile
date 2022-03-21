@@ -12,13 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM node:16-alpine as base
+FROM registry.access.redhat.com/ubi8/nodejs-16:1-18 as base
 
 FROM base as builder
 
 # Some packages (e.g. @google-cloud/profiler) require additional
 # deps for post-install scripts
-RUN apk add --update --no-cache \
+RUN dnf install -y \
     python3 \
     make \
     g++

@@ -18,10 +18,17 @@ FROM base as builder
 
 # Some packages (e.g. @google-cloud/profiler) require additional
 # deps for post-install scripts
-RUN dnf install -y \
+USER root
+
+RUN dnf install --disableplugin=subscription-manager -y \
+    wget \
     python3 \
     make \
-    g++
+    gcc-c++
+
+RUN GRPC_HEALTH_PROBE_VERSION=v0.4.6 && \
+    wget -qO/bin/grpc_health_probe https://github.com/grpc-ecosystem/grpc-health-probe/releases/download/${GRPC_HEALTH_PROBE_VERSION}/grpc_health_probe-linux-amd64 && \
+    chmod +x /bin/grpc_health_probe
 
 WORKDIR /usr/src/app
 
@@ -30,10 +37,6 @@ COPY package*.json ./
 RUN npm install --only=production
 
 FROM base
-
-RUN GRPC_HEALTH_PROBE_VERSION=v0.4.6 && \
-    wget -qO/bin/grpc_health_probe https://github.com/grpc-ecosystem/grpc-health-probe/releases/download/${GRPC_HEALTH_PROBE_VERSION}/grpc_health_probe-linux-amd64 && \
-    chmod +x /bin/grpc_health_probe
 
 WORKDIR /usr/src/app
 

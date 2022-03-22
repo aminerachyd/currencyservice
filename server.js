@@ -172,7 +172,7 @@ function main () {
   server.bindAsync(
     `0.0.0.0:${PORT}`,
     grpc.ServerCredentials.createInsecure(),
-    function() {
+    () => {
       logger.info(`CurrencyService gRPC server started on port ${PORT}`);
       server.start();
     },

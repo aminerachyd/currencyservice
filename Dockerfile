@@ -50,25 +50,31 @@
 
 ###
 
-FROM registry.access.redhat.com/ubi8/nodejs-12:1-70 AS builder
+FROM registry.access.redhat.com/ubi8/nodejs-16:1-18 AS builder
 
 USER root
 
 RUN yum install -y wget python3 make gcc-c++ && yum clean all
 
+RUN GRPC_HEALTH_PROBE_VERSION=v0.4.6 && \
+    wget -qO/bin/grpc_health_probe https://github.com/grpc-ecosystem/grpc-health-probe/releases/download/${GRPC_HEALTH_PROBE_VERSION}/grpc_health_probe-linux-amd64 && \
+    chmod +x /bin/grpc_health_probe
+
 WORKDIR /opt/app-root/src
 
 USER default
 
-COPY . .
+COPY --chown=default:root . .
 
 RUN npm install --only=production
 
-FROM registry.access.redhat.com/ubi8/nodejs-12:1-70
+FROM registry.access.redhat.com/ubi8/nodejs-16:1-18
+
+USER default
 
 COPY --from=builder /opt/app-root/src/node_modules node_modules
 
-COPY . .
+COPY --chown=default:root . .
 
 EXPOSE 7000
 

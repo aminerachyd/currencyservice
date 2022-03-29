@@ -68,9 +68,8 @@ spec:
             {{- if .Values.connectsTo }}
             - name: SERVICE_URL
               value: {{ printf "%s:80" (index .Values.connectsTo 0) | quote }}
-            # FIXME Hardcoded stuff
             - name: PORT
-              value: "7000"
+              value: {{ .Values.image.port }}
             - name: DISABLE_TRACING
               value: "1"
             - name: DISABLE_PROFILER

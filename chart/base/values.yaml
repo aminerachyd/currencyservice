@@ -17,7 +17,7 @@ fullnameOverride: ""
 
 service:
   type: ClusterIP
-  port: 80
+  port: 7000
 
 route:
   enabled: false

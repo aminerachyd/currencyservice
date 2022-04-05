@@ -156,7 +156,7 @@ function convert (call, callback) {
  * Endpoint for health checks
  */
 function check (call, callback) {
-  callback(null, { status: 'UP' });
+  callback(null, { status: 'SERVING' });
 }
 
 /**

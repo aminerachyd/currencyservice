@@ -21,7 +21,7 @@ service:
   port: 7000
 
 route:
-  enabled: false
+  enabled: true
 
 ingress:
   enabled: true

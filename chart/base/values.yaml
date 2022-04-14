@@ -16,7 +16,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 service:
-  enabled: true
+  enabled: false
   type: ClusterIP
   port: 7000
 

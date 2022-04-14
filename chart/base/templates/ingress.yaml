@@ -1,5 +1,5 @@
 {{- if .Values.ingress.enabled -}}
-{{- $fullName := include "starter-kit.fullname" . -}}
+{{- $fullName := include "starter-kit.fullname-svc" . -}}
 {{- $namespace := .Release.Namespace -}}
 {{- $requestType := .Values.ingress.appid.requestType -}}
 apiVersion: networking.k8s.io/v1beta1

@@ -22,6 +22,9 @@ service:
   type: ClusterIP
   port: 7000
 
+submariner:
+  enabled: true
+
 route:
   enabled: false
 

@@ -3,6 +3,8 @@
 # Declare variables to be passed into your templates.
 global: {}
 
+namespaceToDeploy: "multiarch-demo-test"
+
 replicaCount: 1
 logLevel: "debug"
 
